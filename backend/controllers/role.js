@@ -19,8 +19,8 @@ const registerRole = async (req,res) => {
 
 const listRole = async (req,res) => {//no es necesario el req, pero no se pude quitar ya que se puede utilizar nuevamente
     const role = await Role.find();
-    if(!role) return res.status.status(401).send("No role");
+    if(!role || role.length === 0) return res.status(401).send("No role");//role.length porque lo puedce devolver vacio
     return res.status(200).send({role});
 };
 
-module.exports = {registerRole,listRole};
+module.exports = {registerRole,listRole}
