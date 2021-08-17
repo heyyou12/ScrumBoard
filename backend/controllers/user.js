@@ -12,8 +12,9 @@ const registerUser = async (req,res) => {
 
     let hash = await bcrypt.hash(req.body.password, 10);// se encripta el usuario
     
-    let role = await Role.findOne({name: "user"});
-    if(!role) return res.status(400).send("process failed: no role was assigned");
+    let role = await Role.findOne({ name: "user" });
+    if (!role)
+    return res.status(400).send("process failed: No role was assigned"); 
 
     let user = new User({
 
@@ -26,7 +27,7 @@ const registerUser = async (req,res) => {
 
     let result = await user.save();
     if(!result) return res.status(400).send("failed to register user");
-
+    
     
     try {
         let jwt = user.generateJWT();
